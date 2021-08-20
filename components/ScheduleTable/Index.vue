@@ -26,14 +26,16 @@
       </thead>
       <tbody>
         <tr v-for="i in 13" class="border-b">
-          <td class="py-3 text-center">佳怡</td>
+          <td class="py-3 text-center">
+            <employee>佳怡</employee>
+          </td>
 
           <td
             v-for="day in days"
             class="py-4 px-6 text-left whitespace-nowrap"
             :key="`row-${day.getTime()}`"
           >
-            早班
+            <duty class="">早班</duty>
           </td>
         </tr>
 
@@ -63,6 +65,9 @@
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
 import moment from 'moment'
+import Employee from './Employee.vue'
+import Duty from './Duty.vue'
+
 export default Vue.extend({
   name: 'ScheduleTable',
   props: {
@@ -72,6 +77,10 @@ export default Vue.extend({
         return []
       },
     } as PropOptions<Date[]>,
+  },
+  components: {
+    Employee,
+    Duty,
   },
   filters: {
     dayDisplay(value: Date) {
