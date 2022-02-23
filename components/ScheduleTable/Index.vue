@@ -17,47 +17,40 @@
 
           <th
             v-for="day in days"
-            class="py-3 px-6 text-left"
             :key="day.getTime()"
+            class="py-3 px-6 text-left"
           >
             {{ day | dayDisplay }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="i in 13" class="border-b">
-          <td class="py-3 text-center">
-            <employee>佳怡</employee>
-          </td>
+        <template v-if="schedule.duties.length === 0">
+          <tr>
+            <td class="text-center" colspan="8">
+              <p class="m-0 text-gray-700 mt-4 mb-4">
+                <font-awesome-icon icon="exclamation" size="3x" />
+              </p>
+              <p class="text-sm m-0 text-gray-500 mb-4">目前沒有任何排班。</p>
+            </td>
+          </tr>
+        </template>
 
-          <td
-            v-for="day in days"
-            class="py-4 px-6 text-left whitespace-nowrap"
-            :key="`row-${day.getTime()}`"
-          >
-            <duty class="">早班</duty>
-          </td>
-        </tr>
+        <template v-for="duty in schedule.duties" v-else>
+          <tr :key="duty.id" class="border-b">
+            <td class="py-3 text-center">
+              <employee name="abc" />
+            </td>
 
-        <!-- <tr>
-          <td></td>
-          <td>Intro to CSS</td>
-          <td>Adam</td>
-          <td>858</td>
-        </tr>
-        <tr class="bg-emerald-200">
-          <td>
-            A Long and Winding Tour of the History of UI Frameworks and Tools
-            and the Impact on Design
-          </td>
-          <td>Adam</td>
-          <td>112</td>
-        </tr>
-        <tr>
-          <td>Intro to JavaScript</td>
-          <td>Chris</td>
-          <td>1,280</td>
-        </tr> -->
+            <td
+              v-for="day in days"
+              :key="`row-${day.getTime()}`"
+              class="py-4 px-6 text-left whitespace-nowrap"
+            >
+              <duty class="">早班</duty>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </template>
   </table>
@@ -67,6 +60,7 @@ import Vue, { PropOptions } from 'vue'
 import moment from 'moment'
 import Employee from './Employee.vue'
 import Duty from './Duty.vue'
+import { Schedule } from '@/interfaces/schedule'
 
 export default Vue.extend({
   name: 'ScheduleTable',
@@ -77,6 +71,12 @@ export default Vue.extend({
         return []
       },
     } as PropOptions<Date[]>,
+    schedule: {
+      type: Object,
+      default() {
+        return {}
+      },
+    } as PropOptions<Schedule>,
   },
   components: {
     Employee,

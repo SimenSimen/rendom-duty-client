@@ -18,10 +18,10 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/initial.ts' }],
+  plugins: [{ src: '~/plugins/initial.ts' }, '~/plugins/fontawesome.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,6 +34,20 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    [
+      '@nuxtjs/fontawesome',
+      {
+        component: 'fa',
+        suffix: true,
+        proIcons: {
+          // if you have bought the Pro packages
+          // list the icons you want to add, not listed icons will be tree-shaked
+          // solid: ['faHome', 'faHeart'],
+          // include all icons. But dont do this.
+          // regular: true,
+        },
+      },
+    ],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

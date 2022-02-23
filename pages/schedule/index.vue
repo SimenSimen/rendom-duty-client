@@ -1,9 +1,9 @@
 <template>
   <div class="schedule-index-page">
-    <div class="w-12/12 lg:w-10/12 xl:w-8/12 mx-auto my-4">
+    <!-- <div class="w-12/12 lg:w-10/12 xl:w-8/12 mx-auto my-4">
       已選擇店：
       <span>豐原道</span>
-    </div>
+    </div> -->
 
     <div class="w-12/12 lg:w-10/12 xl:w-8/12 mx-auto my-4 flex items-center">
       <date-picker v-model="queryData.period"></date-picker>
@@ -12,11 +12,17 @@
         開始排班
       </button>
 
-      <div class="actinos ml-auto"></div>
+      <div class="actions ml-auto"></div>
+    </div>
+
+    <div class="w-12/12 lg:w-10/12 xl:w-8/12 mx-auto my-4">
+      <span>所有人員匯入</span>
+      <span>匯入上週班表</span>
     </div>
 
     <div class="w-12/12 lg:w-10/12 xl:w-8/12 mx-auto shadow-md">
-      <schedule-table :period="queryData.period"> </schedule-table>
+      <schedule-table :period="queryData.period" :schedule="schedule">
+      </schedule-table>
     </div>
   </div>
 </template>
@@ -40,10 +46,16 @@ export default Vue.extend({
       },
     }
   },
+  computed: {
+    schedule() {
+      return {
+        duties: [],
+      }
+    },
+  },
   created() {
     this.initData()
   },
-  computed: {},
 
   methods: {
     initData(): void {

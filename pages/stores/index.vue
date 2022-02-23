@@ -16,10 +16,10 @@
         <template v-for="store in stores">
           <div class="w-6/12 pb-2 pr-2">
             <store-card
-              :name="store.name"
               :id="store.id"
-              :description="store.description"
               :key="store.id"
+              :name="store.name"
+              :description="store.description"
             />
           </div>
         </template>
@@ -103,10 +103,10 @@ import StoreCard from '@/components/StoreCard/Index.vue'
 
 export default (Vue as ComponentMixinsHelper<LayoutMixin>).extend({
   name: 'StoreIndexPage',
-  mixins: [layoutMixin],
   components: {
     StoreCard,
   },
+  mixins: [layoutMixin],
   data() {
     return {
       stores: [

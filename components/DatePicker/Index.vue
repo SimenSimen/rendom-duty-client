@@ -1,10 +1,9 @@
 <template>
   <div class="date-picker inline-block">
     <v-date-picker v-model="date" class="flex items-center" is-range>
-      <template v-slot="{ inputValue, inputEvents }">
+      <template #default="{ inputValue, inputEvents }">
         <input
           :value="inputValue.start"
-          v-on="inputEvents.start"
           class="
             border
             px-2
@@ -13,6 +12,7 @@
             rounded
             focus:outline-none focus:border-indigo-300
           "
+          v-on="inputEvents.start"
         />
         <svg
           class="w-4 h-4 mx-2"
@@ -29,7 +29,6 @@
         </svg>
         <input
           :value="inputValue.end"
-          v-on="inputEvents.end"
           class="
             border
             px-2
@@ -38,6 +37,7 @@
             rounded
             focus:outline-none focus:border-indigo-300
           "
+          v-on="inputEvents.end"
         />
       </template>
     </v-date-picker>
